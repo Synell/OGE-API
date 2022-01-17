@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2022 Synel
+Copyright (c) 2022 [Synel](https://github.com/Synell) & [Nikolasitude](https://github.com/Nikolasitude)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

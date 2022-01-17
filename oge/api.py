@@ -188,11 +188,6 @@ class OGE:
 
 
 
-    def getUECount():
-        return len(list(OGE.__rawData__.keys()))
-
-
-
     class __UE__:
         class __Pole__:
             class __Matiere__:
@@ -236,6 +231,20 @@ class OGE:
                             return self.__Note__(round(total / totalDiv * max, 2), max, self.coeff)
                         return self.__Note__(total / totalDiv * max, max, self.coeff)
 
+                    def note(self, noteId):
+                        if (noteId - 1) not in list(range(len(self.notes))):
+                            raise Exception(colorama.Fore.RED + '[ERROR]' + colorama.Fore.RESET + f' Invalid Note ID! (Must be between 1 and {len(self.notes)})')
+
+                        return self.notes[noteId - 1]
+
+                    def findNoteByNom(self, noteName):
+                        for note in self.notes:
+                            if note.nom.lower() == noteName.lower(): return note
+                        return None
+
+                    def getNoteCount(self):
+                        return len(self.notes)
+
 
                 def __init__(self, nom = None, coeff = None, notes = None) -> None:
                     self.nom = nom
@@ -264,6 +273,20 @@ class OGE:
                     if roundNote:
                         return self.__GroupeNote__.__Note__(round(total / totalDiv * max, 2), max, self.coeff)
                     return self.__GroupeNote__.__Note__(total / totalDiv * max, max, self.coeff)
+
+                def note(self, noteId):
+                    if (noteId - 1) not in list(range(len(self.notes))):
+                        raise Exception(colorama.Fore.RED + '[ERROR]' + colorama.Fore.RESET + f' Invalid Note ID! (Must be between 1 and {len(self.notes)})')
+
+                    return self.notes[noteId - 1]
+
+                def findNoteByNom(self, noteName):
+                    for note in self.notes:
+                        if note.nom.lower() == noteName.lower(): return note
+                    return None
+
+                def getNoteCount(self):
+                    return len(self.notes)
 
 
 
@@ -295,6 +318,20 @@ class OGE:
                     return self.__Matiere__.__GroupeNote__.__Note__(round(total / totalDiv * max, 2), max, self.coeff)
                 return self.__Matiere__.__GroupeNote__.__Note__(total / totalDiv * max, max, self.coeff)
 
+            def matiere(self, matiereId):
+                if (matiereId - 1) not in list(range(len(self.matieres))):
+                    raise Exception(colorama.Fore.RED + '[ERROR]' + colorama.Fore.RESET + f' Invalid Matiere ID! (Must be between 1 and {len(self.matieres)})')
+
+                return self.matieres[matiereId - 1]
+
+            def findMatiereByNom(self, matiereName):
+                for matiere in self.matieres:
+                    if matiere.nom.lower() == matiereName.lower(): return matiere
+                return None
+
+            def getMatiereCount(self):
+                return len(self.matieres)
+
 
         def __init__(self, nom = None, coeff = None, poles = None) -> None:
             self.nom = nom
@@ -322,8 +359,26 @@ class OGE:
             if roundNote:
                 return self.__Pole__.__Matiere__.__GroupeNote__.__Note__(round(total / totalDiv * max, 2), max, self.coeff)
             return self.__Pole__.__Matiere__.__GroupeNote__.__Note__(total / totalDiv * max, max, self.coeff)
+        
+        def pole(self, poleId):
+            if (poleId - 1) not in list(range(len(self.poles))):
+                raise Exception(colorama.Fore.RED + '[ERROR]' + colorama.Fore.RESET + f' Invalid Pole ID! (Must be between 1 and {len(self.poles)})')
+
+            return self.poles[poleId - 1]
+
+        def findPoleByNom(self, poleName):
+            for pole in self.poles:
+                if pole.nom.lower() == poleName.lower(): return pole
+            return None
+
+        def getPoleCount(self):
+            return len(self.poles)
+
+
 
     def moyenne(max: float = 20.0, roundNote = True):
+        if OGE.__rawData__ == None:
+            return OGE.__connectWarning__()
         total, totalDiv = 0, 0
         for ue in OGE.__data__:
             if ue.coeff == None: continue
@@ -334,6 +389,24 @@ class OGE:
         if roundNote:
             return OGE.__UE__.__Pole__.__Matiere__.__GroupeNote__.__Note__(round(total / totalDiv * max, 2), max, 1.0)
         return OGE.__UE__.__Pole__.__Matiere__.__GroupeNote__.__Note__(total / totalDiv * max, max, 1.0)
+
+    def UE(ueId: int = 1):
+        if OGE.__rawData__ == None:
+            return OGE.__connectWarning__()
+        if (ueId - 1) not in list(range(len(list(OGE.__rawData__.keys())))):
+            raise Exception(colorama.Fore.RED + '[ERROR]' + colorama.Fore.RESET + f' Invalid UE ID! (Must be between 1 and {len(list(OGE.__rawData__.keys()))})')
+
+        return OGE.__data__[ueId - 1]
+
+    def getUECount():
+        return len(OGE.__data__)
+
+    def findUEByNom(self, ueName):
+        if OGE.__rawData__ == None:
+            return OGE.__connectWarning__()
+        for ue in OGE.__data__:
+            if ue.nom.lower() == ueName.lower(): return ue
+        return None
 
 
 
@@ -348,16 +421,6 @@ class OGE:
         OGE.__data__ = data
 
         return data
-
-
-
-    def UE(ueId: int = 1):
-        if OGE.__rawData__ == None:
-            return OGE.__connectWarning__()
-        if (ueId - 1) not in list(range(len(list(OGE.__rawData__.keys())))):
-            raise Exception(colorama.Fore.RED + '[ERROR]' + colorama.Fore.RESET + f' Invalid UE ID! (Must be between 1 and {len(list(OGE.__rawData__.keys()))})')
-
-        return OGE.__data__[ueId - 1]
 
 
 

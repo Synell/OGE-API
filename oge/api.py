@@ -188,7 +188,7 @@ class OGE:
 
 
 
-    def getSemestreCount():
+    def getUECount():
         return len(list(OGE.__rawData__.keys()))
 
 

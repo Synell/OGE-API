@@ -80,6 +80,8 @@ ou
 OGE.getdata()[0]
 ```
 
+
+
 *Obtenir la moyenne de la 1ère UE:*
 ```py
 OGE.UE(1).moyenne()
@@ -88,6 +90,8 @@ ou
 ```py
 OGE.UE(1).moyenne()
 ```
+
+
 
 *Obtenir le nombre d'UE:*
 ```py
@@ -107,6 +111,8 @@ ou
 OGE.UE(1).poles[0]
 ```
 
+
+
 *Obtenir la moyenne du 1er pôle de la 1ère UE:*
 ```py
 OGE.UE(1).pole(1).moyenne()
@@ -115,6 +121,8 @@ ou
 ```py
 OGE.UE(1).poles[0].moyenne()
 ```
+
+
 
 *Obtenir le nombre de pôles de la 1ère UE:*
 ```py
@@ -138,6 +146,8 @@ ou
 OGE.UE(1).poles[0].matieres[0]
 ```
 
+
+
 *Obtenir la moyenne de la 1ère matière du 1er pôle de la 1ère UE:*
 ```py
 OGE.UE(1).pole(1).matiere(1).moyenne()
@@ -146,6 +156,8 @@ ou
 ```py
 OGE.UE(1).poles[0].matieres[0].moyenne()
 ```
+
+
 
 *Obtenir le nombre de matières du 1er pôle de la 1ère UE:*
 ```py
@@ -169,6 +181,8 @@ ou
 OGE.UE(1).poles[0].matieres[0].notes[0]
 ```
 
+
+
 *Obtenir la moyenne du 1er groupe de note de la 1ère matière du 1er pôle de la 1ère UE:*
 ```py
 OGE.UE(1).pole(1).matiere(1).note(1).moyenne()
@@ -177,6 +191,8 @@ ou
 ```py
 OGE.UE(1).poles[0].matieres[0].notes[0].moyenne()
 ```
+
+
 
 *Obtenir le nombre de groupes de notes de la 1ère matière du 1er pôle de la 1ère UE:*
 ```py
@@ -200,6 +216,8 @@ ou
 OGE.UE(1).poles[0].matieres[0].notes[0].notes[0]
 ```
 
+
+
 *Obtenir le nombre de notes du 1er groupe de notes de la 1ère matière du 1er pôle de la 1ère UE:*
 ```py
 OGE.UE(1).pole(1).matiere(1).notes(1).getNoteCount()
@@ -208,4 +226,5 @@ ou
 ```py
 OGE.UE(1).poles[0].matieres[0].notes[0].getNoteCount()
 ```
+
 

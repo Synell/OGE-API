@@ -3,11 +3,11 @@
 
 ## progression de l'API
 
-[x] Obtenir les UE, pôles, matières, groupes de notes et notes à partir d'OGE
-[x] Sauvegarde des données dans un fichier et chargement des données depuis un fichier
-[ ] Gestion des semestres autres que le courant pour les notes
-[ ] Obtenir l'emploi du temps à partir d'OGE
-[ ] Gestion des dates différentes de celle actuelle pour l'emploi du temps
+- [x] Obtenir les UE, pôles, matières, groupes de notes et notes à partir d'OGE
+- [x] Sauvegarde des données dans un fichier et chargement des données depuis un fichier
+- [ ] Gestion des semestres autres que le courant pour les notes
+- [ ] Obtenir l'emploi du temps à partir d'OGE
+- [ ] Gestion des dates différentes de celle actuelle pour l'emploi du temps
 
 ## Initialisation et Données
 

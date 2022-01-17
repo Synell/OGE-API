@@ -1,7 +1,7 @@
 
 # API OGE
 
-## progression de l'API
+## Progression du Développement de l'API
 
 - [x] Obtenir les UE, pôles, matières, groupes de notes et notes à partir d'OGE
 - [x] Sauvegarde des données dans un fichier et chargement des données depuis un fichier

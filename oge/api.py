@@ -53,18 +53,18 @@ class OGE:
 
 
     def __getViewState__(session_, url):
-        print("Obtention de la clé (viewState)...")
+        print(colorama.Fore.LIGHTBLACK_EX + '[INFO]' + colorama.Fore.RESET + 'Getting viewState key...')
         try:
             r = session_.get(url)
-            id = re.findall(r"<li class=\"ui-tabmenuitem(?:.*?)onclick=\"PrimeFaces\.ab\({s:&quot;(.*?)&quot;,f:(?:.*?)</li>", r.text)
-            viewState = re.findall(r"id=\"javax\.faces\.ViewState\" value=\"(.*?)\" />", r.text)
+            id = re.findall(r'<li class=\"ui-tabmenuitem(?:.*?)onclick=\"PrimeFaces\.ab\({s:&quot;(.*?)&quot;,f:(?:.*?)</li>', r.text)
+            viewState = re.findall(r'id=\"javax\.faces\.ViewState\" value=\"(.*?)\" />', r.text)
         except Exception as e:
-            raise Exception("Impossible d'obtenir une clé (viewState).", e)
+            raise Exception(colorama.Fore.RED + '[ERROR]' + colorama.Fore.RESET + f' Unable to get a viewState key!\n{e}')
 
         if(len(id)==0 or len(viewState)==0):
             raise Exception()
         else:
-            print("Clé obtenu avec succès")
+            print(colorama.Fore.GREEN + '[SUCCESS]' + colorama.Fore.RESET + ' Key obtained successfully!')
             return id[0], viewState[0]
 
 

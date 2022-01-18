@@ -20,6 +20,8 @@ class OGE:
     __rawData__ = None
     strInDepth = False
     __data__ = None
+    __semestreCount__ = 0
+    __currentSemester__ = None
 
 
 
@@ -50,6 +52,21 @@ class OGE:
             return keyResults[0]
 
 
+    def __getViewState__(session_, url):
+        print("Obtention de la clé (viewState)...")
+        try:
+            r = session_.get(url)
+            id = re.findall(r"<li class=\"ui-tabmenuitem(?:.*?)onclick=\"PrimeFaces\.ab\({s:&quot;(.*?)&quot;,f:(?:.*?)</li>", r.text)
+            viewState = re.findall(r"id=\"javax\.faces\.ViewState\" value=\"(.*?)\" />", r.text)
+        except Exception as e:
+            raise Exception("Impossible d'obtenir une clé (viewState).", e)
+
+        if(len(id)==0 or len(viewState)==0):
+            raise Exception()
+        else:
+            print("Clé obtenu avec succès")
+            return id[0], viewState[0]
+
 
     def __getHtml__(username = '', password = '', semestre = 1):
         session_ = session()
@@ -69,14 +86,32 @@ class OGE:
 
         print(colorama.Fore.LIGHTBLACK_EX + '[INFO]' + colorama.Fore.RESET + ' Waiting for GET request...')
 
-        code = session_.get(URL_NOTE, headers = {'referer': URL_NOTE})
+        """code = session_.get(URL_NOTE, headers = {'referer': URL_NOTE})
         code = BS(BS(code.text, 'html.parser').prettify(), 'html.parser')
 
-        print(colorama.Fore.GREEN + '[SUCCESS]' + colorama.Fore.RESET + f' Server response successfully obtained!')
+        print(colorama.Fore.GREEN + '[SUCCESS]' + colorama.Fore.RESET + f' Server response successfully obtained!')"""
+
+        data = {
+            'javax.faces.partial.ajax': 'true',
+            'javax.faces.source': 'mainBilanForm:j_id_1t',
+            'javax.faces.partial.execute': 'mainBilanForm:j_id_1t',
+            'javax.faces.partial.render': 'mainBilanForm',
+            'mainBilanForm:j_id_1t': 'mainBilanForm:j_id_1t',
+            'i': str(semestre - 1),
+            'mainBilanForm:j_id_1t_menuid': str(semestre - 1),
+            'mainBilanForm_SUBMIT': '1',
+            'javax.faces.ViewState': OGE.__getViewState__(session_, URL_NOTE)[1]
+        }
+
+        code = session_.post(URL_NOTE, data, headers = {'referer': URL_NOTE})
 
         session_.close()
 
-        return code
+        code = BS(code.text, 'lxml')
+
+        semestreCount = len(code.find_all('a', attrs={'class': 'ui-menuitem-link ui-corner-all'}))
+
+        return code, semestreCount
 
 
 
@@ -164,13 +199,28 @@ class OGE:
 
 
     def connect(username = '', password = '', semestre = 1):
-        OGE.__rawData__ = OGE.__filterData__(OGE.__getHtml__(username, password, semestre))
+        html, OGE.__semestreCount__ = OGE.__getHtml__(username, password, semestre)
+        OGE.__rawData__ = OGE.__filterData__(html)
+        OGE.__currentSemester__ = semestre
+        if OGE.__currentSemester__ > OGE.getSemestreCount(): OGE.__currentSemester__ = OGE.getSemestreCount()
+        if OGE.__currentSemester__ < 1: OGE.__currentSemester__ = 1
         return OGE.__generateAll__()
 
 
 
     def __connectWarning__():
         return print(colorama.Fore.YELLOW + '[WARNING]' + colorama.Fore.RESET + ' You need to login to OGE to get data! Syntax: \'OGE.connect(username, password, semestre)\'.')
+
+
+
+    def getSemestreCount():
+        return OGE.__semestreCount__
+
+
+
+    def getCurrentSemester():
+        return OGE.__currentSemester__
+
 
 
 

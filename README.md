@@ -3,6 +3,8 @@
 
 ## Progression du Développement de l'API
 
+API créée par [Synel](https://github.com/Synell) & [Nikolasitude](https://github.com/Nikolasitude)
+
 - [x] Obtenir les UE, pôles, matières, groupes de notes et notes à partir d'OGE
 - [x] Sauvegarde des données dans un fichier et chargement des données depuis un fichier
 - [x] Gestion des semestres autres que le courant pour les notes

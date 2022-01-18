@@ -53,7 +53,7 @@ class OGE:
 
 
     def __getViewState__(session_, url):
-        print(colorama.Fore.LIGHTBLACK_EX + '[INFO]' + colorama.Fore.RESET + 'Getting viewState key...')
+        print(colorama.Fore.LIGHTBLACK_EX + '[INFO]' + colorama.Fore.RESET + ' Getting viewState key...')
         try:
             r = session_.get(url)
             id = re.findall(r'<li class=\"ui-tabmenuitem(?:.*?)onclick=\"PrimeFaces\.ab\({s:&quot;(.*?)&quot;,f:(?:.*?)</li>', r.text)
